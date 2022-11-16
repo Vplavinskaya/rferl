@@ -15,12 +15,18 @@ The provided JSON data needs to be diff-ed and the results shall be available on
 <host>/v1/diff/<ID>
 
 The results shall provide the following info in JSON format.
-If value of the "input" property of diffed JSONs is equal, just return that information saying “inputs were equal”. No need to return
+- If value of the "input" property of diffed JSONs is equal, just return that information saying “inputs were equal”. No need to return
 compared values.
-If value of the "input" property of diffed JSONs is not of equal size, just return that information “inputs are of different size”. No need
+- If value of the "input" property of diffed JSONs is not of equal size, just return that information “inputs are of different size”. No need
 to return compared values.
-If value of the "input" property of diffed JSONs has the same size, perform a simple diff - return offsets (in both values of the "input"
+- If value of the "input" property of diffed JSONs has the same size, perform a simple diff - return offsets (in both values of the "input"
 property) and lengths (in both values of the "input" property) of the differences.
 
+# Technology stack
+- .Net 7 Web application (controllers + openApi documentation)
+- MemoryCache as a storage for left/right text
+
+
 # Limitations
-todo
+Memory Cache cannot be used in production, because storage is going to be lost after rebooting.
+I would use database as a storage, especially I would recommend to use Redis with TTL polciy.
