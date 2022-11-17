@@ -30,3 +30,6 @@ property) and lengths (in both values of the "input" property) of the difference
 # Limitations
 Memory Cache cannot be used in production, because storage is going to be lost after rebooting.
 I would use database as a storage, especially I would recommend to use Redis with TTL polciy.
+
+# Remarks
+Use "application/custom" Content-Type in order to send base64-encoded left & right text values.

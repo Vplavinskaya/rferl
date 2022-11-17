@@ -28,7 +28,7 @@ namespace CompareTextApi.Controllers
         }
 
         /// <summary>
-        /// Add left side text for comparison
+        /// Add left side text for comparison. If there is left text with specified id in storage - the left text will be overwritten. 
         /// </summary>
         /// <param name="id">Id of the left side input</param>
         /// <param name="inputRequest">Input text.</param>
@@ -52,7 +52,7 @@ namespace CompareTextApi.Controllers
         }
 
         /// <summary>
-        /// Add right side text for comparison
+        /// Add right side text for comparison. If there is right text with specified id in storage - the right text will be overwritten. 
         /// </summary>
         /// <param name="id">Id of the right side input</param>
         /// <param name="inputRequest">Input text.</param>
@@ -77,13 +77,27 @@ namespace CompareTextApi.Controllers
 
         /// <summary>
         /// Compare texts from the storage. Use endpoints to add left and right text before executing this one.
+        ///     If it is equal - returns IsEqual = true, IsSameSize = true.
+        ///     if it is not equal size - returns IsEqual = false, IsSameSize = false without OffsetDetails.
+        ///     If it is not equal and the same size - returns IsEqual = false, IsSameSize = true and offsets.
         /// </summary>
         /// <param name="id">Id of the text which was added</param>
-        /// /// <remarks>
+        /// <remarks>
         /// Sample request:
         ///
         ///     GET /diff/b37ea680-6ed0-4023-baed-13b123ab6498
-        ///
+        /// Sample response:
+        /// 
+        ///     {
+        ///         "isEqual": false,
+        ///         "isSameSize": false,
+        ///         "details": {
+        ///           "offsets": [
+        ///             0,
+        ///             10
+        ///           ],
+        ///           "differenceLength": 2
+        ///     }
         /// </remarks>
         /// <response code="200">Comparison has been successfully done.</response>
         /// <response code="422">Left or right text wasn't set.</response>
